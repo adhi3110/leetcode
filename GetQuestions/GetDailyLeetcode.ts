@@ -104,7 +104,7 @@ export function buildSource(snippet: string, cases: Case[] = []): { name: string
     }
     const name = match[1];
     // LeetCode ends the snippet with "};" - drop the stray semicolon.
-    const fn = snippet.trim().replace(/\};?\s*$/, '}');
+    const fn = snippet.trim().replace(/};?\s*$/, '}');
     const inputs = cases.map(formatInput).join('\n');
     const expected = cases.map(formatExpected).join(', ');
 
@@ -217,6 +217,7 @@ export async function run(argv: string[], delayMs = 600): Promise<void> {
     console.log(await generateFor(daily.question.titleSlug, o.out, 'Daily', o.force));
 }
 
+// @ts-ignore
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
     run(process.argv.slice(2)).catch((e) => {
         console.error(e.message);
